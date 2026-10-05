@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "title": "Mobile Gathering #15: Compose Multiplatform in Production",
+    "date": "Oct 22, 2026",
+    "time": "16:00 - 17:30 CET",
+    "format": "HYBRID",
+    "location": "Schwarz Digits Campus & Google Meet",
+    "speaker": "Aleks Morgan & Guild Leads",
+    "isNext": true
+  },
+  {
+    "id": "2",
+    "title": "Mobile Gathering #16: iOS 26 Architecture Review & Swift Interop",
+    "date": "Nov 19, 2026",
+    "time": "16:00 - 17:30 CET",
+    "format": "VIRTUAL",
+    "location": "Google Meet",
+    "speaker": "Jordan Taylor & Mobile Leads",
+    "isNext": false
+  },
+  {
+    "id": "3",
+    "title": "Mobile Gathering #17: Security & Offline-First Enterprise Data",
+    "date": "Dec 17, 2026",
+    "time": "15:30 - 17:00 CET",
+    "format": "HYBRID",
+    "location": "Heilbronn & Google Meet",
+    "speaker": "Samira Becker & Security Guild",
+    "isNext": false
+  }
+]

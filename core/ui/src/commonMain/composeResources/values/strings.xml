@@ -1,0 +1,35 @@
+<resources>
+    <!-- Brand & Application -->
+    <string name="app_name">Schwarz Mobile Community</string>
+    <string name="brand_schwarz_digits">SCHWARZ DIGITS</string>
+
+    <!-- Navigation Destinations -->
+    <string name="nav_news">News</string>
+    <string name="nav_meetings">Meetings</string>
+
+    <!-- News Screen -->
+    <string name="news_headline">Community News</string>
+    <string name="news_subtitle">Digital sovereignty, KMP architectures, and tech updates.</string>
+    <string name="news_read_more">Read more →</string>
+
+    <!-- Meetings Screen -->
+    <string name="meetings_headline">Community Gatherings</string>
+    <string name="meetings_subtitle">Monthly gatherings for knowledge sharing, demos, and networking.</string>
+    <string name="meetings_badge_next">NEXT GATHERING</string>
+    <string name="meetings_action_join">Join Meeting →</string>
+    <string name="meetings_host_prefix">Host: %1$s</string>
+    <string name="meetings_speaker_prefix">Speaker: %1$s</string>
+    <string name="meetings_action_share">Share meeting</string>
+    <string name="meetings_share_text">Hey, are you interested in the Mobile Community?</string>
+
+    <!-- State Indicators (Loading, Empty, Error) -->
+    <string name="loading_news">Loading news...</string>
+    <string name="loading_meetings">Loading meetings...</string>
+    <string name="news_empty_title">No news available</string>
+    <string name="news_empty_subtitle">Hey, we currently don\'t have any news updates. Check back soon!</string>
+    <string name="meetings_empty_title">No meetings scheduled</string>
+    <string name="meetings_empty_subtitle">Hey, we currently have no upcoming community meetings. New dates will be announced soon!</string>
+    <string name="state_error_title">Failed to load</string>
+    <string name="state_error_subtitle">The content could not be loaded. Please try again.</string>
+    <string name="action_retry">Retry</string>
+</resources>

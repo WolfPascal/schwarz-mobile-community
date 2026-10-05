@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=Schwarz Mobile Community
+PRODUCT_BUNDLE_IDENTIFIER=com.schwarz_digits.mobilecommunity.SchwarzMobileCommunity$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0

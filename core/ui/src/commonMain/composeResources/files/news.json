@@ -1,0 +1,42 @@
+[
+  {
+    "id": "1",
+    "title": "Kotlin Multiplatform in Enterprise Apps",
+    "summary": "How shared business logic accelerates delivery, digital sovereignty, and consistency across Android and iOS at Schwarz Digits.",
+    "author": "Architecture Guild",
+    "date": "Oct 2, 2026",
+    "readTime": "4 min read",
+    "tag": "#KMP",
+    "imageUrl": "https://api.schwarz-digits.local/v1/images/news_kmp.jpg"
+  },
+  {
+    "id": "2",
+    "title": "Compose Multiplatform & iOS Liquid Glass",
+    "summary": "Deep dive into combining Compose Multiplatform screen rendering with native iOS 26 Liquid Glass navigation shells.",
+    "author": "Mobile Core Team",
+    "date": "Sep 28, 2026",
+    "readTime": "5 min read",
+    "tag": "#Compose",
+    "imageUrl": "https://api.schwarz-digits.local/v1/images/news_compose.jpg"
+  },
+  {
+    "id": "3",
+    "title": "STACKIT Cloud & Secure Mobile Backends",
+    "summary": "Sovereign cloud infrastructure and zero-trust API architecture for European enterprise mobile apps.",
+    "author": "STACKIT Security",
+    "date": "Sep 20, 2026",
+    "readTime": "6 min read",
+    "tag": "#Sovereignty",
+    "imageUrl": "https://api.schwarz-digits.local/v1/images/news_stackit.jpg"
+  },
+  {
+    "id": "4",
+    "title": "Ktor Mocking & Offline Network Simulation",
+    "summary": "Simulating real-world latency, error responses, and offline caching patterns for enterprise mobile workshops.",
+    "author": "Developer Relations",
+    "date": "Sep 15, 2026",
+    "readTime": "4 min read",
+    "tag": "#Networking",
+    "imageUrl": "https://api.schwarz-digits.local/v1/images/news_ktor.jpg"
+  }
+]
