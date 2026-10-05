@@ -78,8 +78,8 @@ graph TD
     MeetingsApi --> CoreModel
 
     %% Cross-feature communication rule
-    NewsImpl -.->|Contract Only (Allowed)| MeetingsApi
-    MeetingsImpl -.->|Contract Only (Allowed)| NewsApi
+    NewsImpl -.->|"Contract Only (Allowed)"| MeetingsApi
+    MeetingsImpl -.->|"Contract Only (Allowed)"| NewsApi
 
     classDef api fill:#1B4965,stroke:#62B6CB,stroke-width:2px,color:#fff;
     classDef impl fill:#2B2D42,stroke:#8D99AE,stroke-width:2px,color:#fff;
