@@ -41,6 +41,7 @@ fun App(
                         NavigationDestination.NEWS -> {
                             newsFeatureEntry.NewsContent(contentPadding = paddingValues)
                         }
+
                         NavigationDestination.MEETINGS -> {
                             meetingsFeatureEntry.MeetingsContent(contentPadding = paddingValues)
                         }
