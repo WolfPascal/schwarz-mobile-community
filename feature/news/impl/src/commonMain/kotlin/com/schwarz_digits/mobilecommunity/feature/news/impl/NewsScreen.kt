@@ -142,6 +142,7 @@ internal fun NewsScreen(
                     )
                 }
             }
+
             is NewsUiState.Empty -> {
                 item {
                     EmptyStateView(
@@ -150,6 +151,7 @@ internal fun NewsScreen(
                     )
                 }
             }
+
             is NewsUiState.Error -> {
                 item {
                     ErrorStateView(
@@ -159,6 +161,7 @@ internal fun NewsScreen(
                     )
                 }
             }
+
             is NewsUiState.Success -> {
                 items(state.articles, key = { it.id }) { article ->
                     NewsArticleCard(article = article)

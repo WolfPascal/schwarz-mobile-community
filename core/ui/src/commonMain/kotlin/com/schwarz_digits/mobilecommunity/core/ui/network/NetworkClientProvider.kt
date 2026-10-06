@@ -117,6 +117,7 @@ object NetworkClientProvider {
                                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
                             )
                         }
+
                         urlPath.endsWith("/v1/meetings") || urlPath.endsWith("/meetings") -> {
                             val json = mockDataProvider.getMeetingsJson()
                             respond(
@@ -125,6 +126,7 @@ object NetworkClientProvider {
                                 headers = headersOf(HttpHeaders.ContentType, ContentType.Application.Json.toString()),
                             )
                         }
+
                         else -> {
                             respond(
                                 content = """{"error": "Resource Not Found", "path": "$urlPath"}""",
