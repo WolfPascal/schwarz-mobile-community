@@ -41,6 +41,12 @@ kotlin {
             api(libs.ktor.serialization.kotlinxJson)
             api(libs.ktor.client.mock)
         }
+        androidMain {
+            dependencies {
+                implementation(libs.lottie)
+                implementation(libs.compose.uiToolingPreview)
+            }
+        }
     }
 }
 
