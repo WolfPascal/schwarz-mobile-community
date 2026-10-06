@@ -184,6 +184,7 @@ fun AsyncNetworkImage(
                     shape = shape,
                 )
             }
+
             is ImageLoadState.Success -> {
                 Image(
                     bitmap = state.bitmap,
@@ -192,6 +193,7 @@ fun AsyncNetworkImage(
                     contentScale = contentScale,
                 )
             }
+
             is ImageLoadState.Error -> {
                 Box(
                     modifier =

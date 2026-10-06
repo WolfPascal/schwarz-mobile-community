@@ -246,4 +246,4 @@ Run the unit test suites across shared and feature modules:
   # Verify
   ktlint "**/src/**/*.kt"
   ```
-* **Architecture References**: Detailed functional and technical blueprints are located in the [**`.agent/`**](./.agent) directory. See [**`AGENT.md`**](./AGENT.md) for quick navigation.
+* **Architecture References**: Detailed functional and technical blueprints are located in the [**`docs/`**](./docs) directory. See [**`AGENTS.md`**](./AGENTS.md) for quick navigation.
