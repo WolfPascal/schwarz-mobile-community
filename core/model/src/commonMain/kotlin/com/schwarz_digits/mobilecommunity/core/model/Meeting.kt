@@ -1,5 +1,7 @@
 package com.schwarz_digits.mobilecommunity.core.model
 
+import kotlin.time.Instant
+
 /**
  * Format of a community gathering.
  */
@@ -22,5 +24,6 @@ data class Meeting(
     val format: MeetingFormat,
     val location: String,
     val speaker: String,
-    val isNext: Boolean = false,
+    val startsAt: Instant,
+    val endsAt: Instant,
 )
