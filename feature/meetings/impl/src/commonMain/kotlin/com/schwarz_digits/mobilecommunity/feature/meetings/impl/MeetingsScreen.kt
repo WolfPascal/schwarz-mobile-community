@@ -210,7 +210,7 @@ internal fun MeetingsScreen(
 }
 
 @Composable
-private fun NextMeetingHighlightCard(
+internal fun NextMeetingHighlightCard(
     meeting: Meeting,
     onShareClick: () -> Unit,
     onAgendaClick: () -> Unit,

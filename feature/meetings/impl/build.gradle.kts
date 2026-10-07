@@ -9,6 +9,10 @@ plugins {
 }
 
 kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -21,6 +25,12 @@ kotlin {
 
         compilerOptions {
             jvmTarget = JvmTarget.JVM_11
+        }
+        androidResources {
+            enable = true
+        }
+        withHostTest {
+            isIncludeAndroidResources = true
         }
     }
 
@@ -37,5 +47,15 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
         }
+        commonTest.dependencies {
+            implementation(libs.kotlin.test)
+            implementation(libs.compose.uiTest)
+        }
     }
+}
+
+dependencies {
+    "androidHostTestImplementation"(libs.robolectric)
+    "androidHostTestImplementation"(libs.junit)
+    "androidHostTestImplementation"(libs.androidx.activity.compose)
 }
