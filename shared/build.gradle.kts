@@ -15,6 +15,8 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            export(project(":core:ui"))
+            export(project(":core:model"))
         }
     }
 
@@ -40,7 +42,7 @@ kotlin {
             implementation(libs.compose.uiTooling)
         }
         commonMain.dependencies {
-            implementation(project(":core:model"))
+            api(project(":core:model"))
             api(project(":core:ui"))
             implementation(project(":feature:news:api"))
             implementation(project(":feature:news:impl"))

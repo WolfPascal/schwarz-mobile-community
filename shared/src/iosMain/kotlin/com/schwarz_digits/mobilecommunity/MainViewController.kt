@@ -1,6 +1,8 @@
 package com.schwarz_digits.mobilecommunity
 
 import androidx.compose.ui.window.ComposeUIViewController
+import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.NativeLottieAnimation
+import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.rememberSplashScreenJson
 import com.schwarz_digits.mobilecommunity.core.ui.theme.CommunityTheme
 import com.schwarz_digits.mobilecommunity.feature.meetings.api.MeetingsFeatureEntry
 import com.schwarz_digits.mobilecommunity.feature.meetings.impl.MeetingsFeatureEntryImpl
@@ -10,6 +12,18 @@ import platform.UIKit.UIViewController
 
 private val defaultNewsFeatureEntry: NewsFeatureEntry by lazy { NewsFeatureEntryImpl() }
 private val defaultMeetingsFeatureEntry: MeetingsFeatureEntry by lazy { MeetingsFeatureEntryImpl() }
+
+fun SplashScreenViewController(onFinished: () -> Unit): UIViewController =
+    ComposeUIViewController {
+        val jsonContent = rememberSplashScreenJson()
+        if (jsonContent != null) {
+            NativeLottieAnimation(
+                jsonContent = jsonContent,
+                progress = 1f,
+                onAnimationFinished = onFinished
+            )
+        }
+    }
 
 /**
  * Fallback entry point for pre-iOS 26 or standalone full-Compose hosting.

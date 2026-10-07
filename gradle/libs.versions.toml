@@ -17,6 +17,7 @@ kotlinx-serialization = "1.9.0"
 ktor = "3.3.3"
 ktlint = "1.8.0"
 material3 = "1.12.0-alpha03"
+lottieVersion = "6.7.1"
 robolectric = "4.14.1"
 
 [libraries]
@@ -46,6 +47,7 @@ ktor-client-contentNegotiation = { module = "io.ktor:ktor-client-content-negotia
 ktor-serialization-kotlinxJson = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 ktlint-cli = { module = "com.pinterest.ktlint:ktlint-cli", version.ref = "ktlint" }
+lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieVersion" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -9,6 +9,7 @@ plugins {
 }
 
 kotlin {
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -40,6 +41,12 @@ kotlin {
             api(libs.ktor.client.contentNegotiation)
             api(libs.ktor.serialization.kotlinxJson)
             api(libs.ktor.client.mock)
+        }
+        androidMain {
+            dependencies {
+                implementation(libs.lottie)
+                implementation(libs.compose.uiToolingPreview)
+            }
         }
     }
 }
