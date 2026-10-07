@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.viewinterop.UIKitView
@@ -17,6 +16,7 @@ object LottieSplashHelper {
     var lottieViewFactory: ((jsonContent: String, onFinished: () -> Unit) -> UIView)? = null
 }
 
+//TODO: Implement vibration
 @Composable
 actual fun NativeLottieAnimation(
     jsonContent: String,
@@ -30,9 +30,6 @@ actual fun NativeLottieAnimation(
                 .fillMaxSize()
                 .background(Color.Black),
     ) {
-        LaunchedEffect(Unit) {
-            triggerIosHaptic()
-        }
 
         val factory = LottieSplashHelper.lottieViewFactory
         if (factory != null) {

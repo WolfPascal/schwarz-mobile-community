@@ -51,12 +51,13 @@ fun SplashScreen(
     }
 }
 
+//TODO: Show Main Screen
 @Composable
 private fun SplashScreenAnimation(
     jsonContent: String,
     onAnimationFinished: () -> Unit,
 ) {
-    val context = LocalContext.current
+    val localContext = LocalContext.current
     var hasVibrated by remember { mutableStateOf(false) }
 
     val composition by rememberLottieComposition(
@@ -77,9 +78,8 @@ private fun SplashScreenAnimation(
     val markerProgress =
         remember(composition, hapticMarker) {
             val comp = composition
-            val marker = hapticMarker
-            if (comp != null && marker != null && comp.durationFrames > 0) {
-                (marker.startFrame - comp.startFrame) / comp.durationFrames
+            if (comp != null && hapticMarker != null && comp.durationFrames > 0) {
+                (hapticMarker.startFrame - comp.startFrame) / comp.durationFrames
             } else {
                 null
             }
@@ -88,8 +88,7 @@ private fun SplashScreenAnimation(
     LaunchedEffect(logoAnimationState.progress, markerProgress) {
         if (markerProgress != null && logoAnimationState.progress >= markerProgress && !hasVibrated) {
             hasVibrated = true
-            // TODO: Vibrate
-            context.vibratePhone()
+            localContext.vibratePhone()
         }
     }
 
@@ -103,8 +102,6 @@ private fun SplashScreenAnimation(
 
     LaunchedEffect(logoAnimationState.isAtEnd) {
         if (logoAnimationState.isAtEnd && logoAnimationState.progress == 1f) {
-            // TODO: Show Main Screen
-            onAnimationFinished()
         }
     }
 }

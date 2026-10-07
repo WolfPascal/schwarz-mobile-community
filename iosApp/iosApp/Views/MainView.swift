@@ -3,13 +3,13 @@ import Shared
 
 
 struct SplashScreenView: UIViewControllerRepresentable {
-    let onFinished: () -> Void
+   let onFinished: () -> Void
 
     func makeUIViewController(context: Context) -> UIViewController {
-        MainViewControllerKt.SplashScreenViewController(onFinished: onFinished)
+       MainViewControllerKt.SplashScreenViewController(onFinished: onFinished)
     }
 
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
+   func updateUIViewController(_ uiViewController: UIViewController, context: Context) {}
 }
 
 

@@ -10,8 +10,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.NativeLottieAnimation
-import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.rememberSplashScreenJson
 import com.schwarz_digits.mobilecommunity.core.ui.theme.CommunityTheme
 import com.schwarz_digits.mobilecommunity.feature.meetings.api.MeetingsFeatureEntry
 import com.schwarz_digits.mobilecommunity.feature.meetings.impl.MeetingsFeatureEntryImpl
@@ -20,47 +18,33 @@ import com.schwarz_digits.mobilecommunity.feature.news.impl.NewsFeatureEntryImpl
 import com.schwarz_digits.mobilecommunity.ui.navigation.NavigationDestination
 import com.schwarz_digits.mobilecommunity.ui.navigation.PlatformBottomBar
 
+//TODO: Show SplashScreen Animation (Android)
 @Composable
 fun App(
     newsFeatureEntry: NewsFeatureEntry = remember { NewsFeatureEntryImpl() },
     meetingsFeatureEntry: MeetingsFeatureEntry = remember { MeetingsFeatureEntryImpl() },
 ) {
     CommunityTheme {
-        var splashScreenFinished by remember { mutableStateOf(false) }
+        var currentDestination by remember { mutableStateOf(NavigationDestination.NEWS) }
 
-        if (!splashScreenFinished) {
-            val jsonContent = rememberSplashScreenJson()
-            if (jsonContent != null) {
-                NativeLottieAnimation(
-                    jsonContent = jsonContent,
-                    progress = 1f,
-                    onAnimationFinished = {
-                        splashScreenFinished = true
-                    },
+        Scaffold(
+            modifier = Modifier.fillMaxSize(),
+            bottomBar = {
+                PlatformBottomBar(
+                    currentDestination = currentDestination,
+                    onDestinationSelected = { currentDestination = it },
                 )
-            }
-        } else {
-            var currentDestination by remember { mutableStateOf(NavigationDestination.NEWS) }
+            },
+        ) { paddingValues ->
+            Box(modifier = Modifier.fillMaxSize()) {
+                Crossfade(targetState = currentDestination) { destination ->
+                    when (destination) {
+                        NavigationDestination.NEWS -> {
+                            newsFeatureEntry.NewsContent(contentPadding = paddingValues)
+                        }
 
-            Scaffold(
-                modifier = Modifier.fillMaxSize(),
-                bottomBar = {
-                    PlatformBottomBar(
-                        currentDestination = currentDestination,
-                        onDestinationSelected = { currentDestination = it },
-                    )
-                },
-            ) { paddingValues ->
-                Box(modifier = Modifier.fillMaxSize()) {
-                    Crossfade(targetState = currentDestination) { destination ->
-                        when (destination) {
-                            NavigationDestination.NEWS -> {
-                                newsFeatureEntry.NewsContent(contentPadding = paddingValues)
-                            }
-
-                            NavigationDestination.MEETINGS -> {
-                                meetingsFeatureEntry.MeetingsContent(contentPadding = paddingValues)
-                            }
+                        NavigationDestination.MEETINGS -> {
+                            meetingsFeatureEntry.MeetingsContent(contentPadding = paddingValues)
                         }
                     }
                 }
