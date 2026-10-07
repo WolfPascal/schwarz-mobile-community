@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.NativeLottieAnimation
+import com.schwarz_digits.mobilecommunity.core.ui.splashscreen.rememberSplashScreenJson
 import com.schwarz_digits.mobilecommunity.core.ui.theme.CommunityTheme
 import com.schwarz_digits.mobilecommunity.feature.meetings.api.MeetingsFeatureEntry
 import com.schwarz_digits.mobilecommunity.feature.meetings.impl.MeetingsFeatureEntryImpl
@@ -24,26 +26,42 @@ fun App(
     meetingsFeatureEntry: MeetingsFeatureEntry = remember { MeetingsFeatureEntryImpl() },
 ) {
     CommunityTheme {
-        var currentDestination by remember { mutableStateOf(NavigationDestination.NEWS) }
+        var splashScreenFinished by remember { mutableStateOf(false) }
 
-        Scaffold(
-            modifier = Modifier.fillMaxSize(),
-            bottomBar = {
-                PlatformBottomBar(
-                    currentDestination = currentDestination,
-                    onDestinationSelected = { currentDestination = it },
+        if (!splashScreenFinished) {
+            val jsonContent = rememberSplashScreenJson()
+            if (jsonContent != null) {
+                NativeLottieAnimation(
+                    jsonContent = jsonContent,
+                    progress = 1f,
+                    onAnimationFinished = {
+                        splashScreenFinished = true
+                    }
                 )
-            },
-        ) { paddingValues ->
-            Box(modifier = Modifier.fillMaxSize()) {
-                Crossfade(targetState = currentDestination) { destination ->
-                    when (destination) {
-                        NavigationDestination.NEWS -> {
-                            newsFeatureEntry.NewsContent(contentPadding = paddingValues)
-                        }
+            }
+        } else {
 
-                        NavigationDestination.MEETINGS -> {
-                            meetingsFeatureEntry.MeetingsContent(contentPadding = paddingValues)
+            var currentDestination by remember { mutableStateOf(NavigationDestination.NEWS) }
+
+            Scaffold(
+                modifier = Modifier.fillMaxSize(),
+                bottomBar = {
+                    PlatformBottomBar(
+                        currentDestination = currentDestination,
+                        onDestinationSelected = { currentDestination = it },
+                    )
+                },
+            ) { paddingValues ->
+                Box(modifier = Modifier.fillMaxSize()) {
+                    Crossfade(targetState = currentDestination) { destination ->
+                        when (destination) {
+                            NavigationDestination.NEWS -> {
+                                newsFeatureEntry.NewsContent(contentPadding = paddingValues)
+                            }
+
+                            NavigationDestination.MEETINGS -> {
+                                meetingsFeatureEntry.MeetingsContent(contentPadding = paddingValues)
+                            }
                         }
                     }
                 }
