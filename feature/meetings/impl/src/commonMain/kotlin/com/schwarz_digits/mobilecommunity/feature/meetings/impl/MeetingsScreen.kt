@@ -49,13 +49,9 @@ import com.schwarz_digits.mobilecommunity.core.ui.resources.Res
 import com.schwarz_digits.mobilecommunity.core.ui.resources.brand_schwarz_digits
 import com.schwarz_digits.mobilecommunity.core.ui.resources.ic_share
 import com.schwarz_digits.mobilecommunity.core.ui.resources.loading_meetings
-import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_action_join
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_action_share
-import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_badge_next
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_empty_subtitle
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_empty_title
-import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_headline
-import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_host_prefix
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_share_text
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_speaker_prefix
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_subtitle
@@ -68,6 +64,16 @@ import com.schwarz_digits.mobilecommunity.feature.meetings.impl.presentation.Mee
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 
+// =================================================================================================
+// TODO: Task 1 - Working with Resources in Compose Multiplatform
+//
+// In Compose Multiplatform, strings and assets are managed via the auto-generated `Res` class.
+// Localized strings can be loaded using `stringResource(Res.string.<id>, ...)`.
+//
+// Your Task:
+// Find the 4 hardcoded strings marked with "TODO: Task 1" below, inspect `strings.xml` in `:core:ui`,
+// and replace them with the matching `Res.string` references.
+// =================================================================================================
 @Composable
 internal fun MeetingsScreen(
     contentPadding: PaddingValues = PaddingValues(0.dp),
@@ -145,8 +151,9 @@ internal fun MeetingsScreen(
 
                 Spacer(modifier = Modifier.height(8.dp))
 
+                // TODO: Task 1 - Load string from strings.xml using stringResource(Res.string...)
                 Text(
-                    text = stringResource(Res.string.meetings_headline),
+                    text = "Community Gatherings",
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onBackground,
@@ -237,8 +244,9 @@ internal fun NextMeetingHighlightCard(
                     color = DigitsColors.CyanPrimary,
                     shape = RoundedCornerShape(6.dp),
                 ) {
+                    // TODO: Task 1 - Load string from strings.xml using stringResource(Res.string...)
                     Text(
-                        text = stringResource(Res.string.meetings_badge_next),
+                        text = "NEXT GATHERING",
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                         style = MaterialTheme.typography.labelSmall,
                         color = DigitsColors.NavyMidnight,
@@ -291,8 +299,9 @@ internal fun NextMeetingHighlightCard(
 
             Spacer(modifier = Modifier.height(4.dp))
 
+            // TODO: Task 1 - Load string with format argument from strings.xml using stringResource(Res.string...)
             Text(
-                text = "🎙️ " + stringResource(Res.string.meetings_host_prefix, meeting.speaker),
+                text = "🎙️ Host: ${meeting.speaker}",
                 style = MaterialTheme.typography.bodyMedium,
                 color = DigitsColors.TextMuted,
             )
@@ -314,8 +323,9 @@ internal fun NextMeetingHighlightCard(
                     shape = RoundedCornerShape(10.dp),
                     modifier = Modifier.weight(1f),
                 ) {
+                    // TODO: Task 1 - Load string from strings.xml using stringResource(Res.string...)
                     Text(
-                        text = stringResource(Res.string.meetings_action_join),
+                        text = "See agenda →",
                         fontWeight = FontWeight.Bold,
                         fontSize = 15.sp,
                     )
