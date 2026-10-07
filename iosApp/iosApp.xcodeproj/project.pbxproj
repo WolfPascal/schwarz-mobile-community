@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		15D56E223075AEDB00CD804A /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 15D56E213075AEDB00CD804A /* Lottie */; };
-		15D56E243075AEDB00CD804A /* Lottie-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 15D56E233075AEDB00CD804A /* Lottie-Dynamic */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,7 +46,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				15D56E223075AEDB00CD804A /* Lottie in Frameworks */,
-				15D56E243075AEDB00CD804A /* Lottie-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,7 +91,6 @@
 			name = iosApp;
 			packageProductDependencies = (
 				15D56E213075AEDB00CD804A /* Lottie */,
-				15D56E233075AEDB00CD804A /* Lottie-Dynamic */,
 			);
 			productName = iosApp;
 			productReference = D8BAD02C07868CAC164C39E5 /* Schwarz Mobile Community.app */;
@@ -407,11 +404,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 15D56E203075AEDB00CD804A /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
-		};
-		15D56E233075AEDB00CD804A /* Lottie-Dynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 15D56E203075AEDB00CD804A /* XCRemoteSwiftPackageReference "lottie-ios" */;
-			productName = "Lottie-Dynamic";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

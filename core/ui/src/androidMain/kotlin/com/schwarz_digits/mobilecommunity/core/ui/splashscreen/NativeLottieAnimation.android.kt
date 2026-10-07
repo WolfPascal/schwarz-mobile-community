@@ -15,7 +15,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.tooling.preview.Preview
 import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
@@ -50,7 +49,6 @@ fun SplashScreen(jsonContent: String, onAnimationFinished: () -> Unit = {}) {
 
 @Composable
 private fun SplashScreenAnimation(jsonContent: String, onAnimationFinished: () -> Unit) {
-    val view = LocalView.current
     val context = LocalContext.current
     var hasVibrated by remember { mutableStateOf(false) }
 
@@ -81,6 +79,7 @@ private fun SplashScreenAnimation(jsonContent: String, onAnimationFinished: () -
     LaunchedEffect(logoAnimationState.progress, markerProgress) {
         if (markerProgress != null && logoAnimationState.progress >= markerProgress && !hasVibrated) {
             hasVibrated = true
+            //TODO: Vibrate
             context.vibratePhone()
         }
     }
@@ -95,6 +94,7 @@ private fun SplashScreenAnimation(jsonContent: String, onAnimationFinished: () -
 
     LaunchedEffect(logoAnimationState.isAtEnd) {
         if (logoAnimationState.isAtEnd && logoAnimationState.progress == 1f) {
+            //TODO: Show Main Screen
             onAnimationFinished()
         }
     }
