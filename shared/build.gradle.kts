@@ -15,6 +15,8 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            export(project(":core:ui"))
+            export(project(":core:model"))
         }
     }
 
