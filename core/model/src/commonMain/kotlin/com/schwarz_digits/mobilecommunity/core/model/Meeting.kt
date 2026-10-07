@@ -23,4 +23,5 @@ data class Meeting(
     val location: String,
     val speaker: String,
     val isNext: Boolean = false,
+    val agendaUrl: String? = null,
 )

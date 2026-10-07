@@ -32,6 +32,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -86,6 +89,17 @@ internal fun MeetingsScreen(
     val uiState by viewModel.uiState.collectAsState()
     val shareLauncher = rememberTextShareLauncher()
     val shareText = stringResource(Res.string.meetings_share_text)
+    var selectedAgendaUrl by remember { mutableStateOf<String?>(null) }
+
+    if (selectedAgendaUrl != null) {
+        MeetingAgendaScreen(
+            url = selectedAgendaUrl.orEmpty(),
+            onBackClick = { selectedAgendaUrl = null },
+            contentPadding = contentPadding,
+            modifier = modifier,
+        )
+        return
+    }
 
     val statusBarTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
     val topPadding =
@@ -179,6 +193,9 @@ internal fun MeetingsScreen(
                         NextMeetingHighlightCard(
                             meeting = meeting,
                             onShareClick = { shareLauncher(shareText) },
+                            onAgendaClick = {
+                                selectedAgendaUrl = meeting.agendaUrl ?: "https://schwarz-digits.de"
+                            },
                         )
                     } else {
                         StandardMeetingCard(
@@ -193,9 +210,10 @@ internal fun MeetingsScreen(
 }
 
 @Composable
-private fun NextMeetingHighlightCard(
+internal fun NextMeetingHighlightCard(
     meeting: Meeting,
     onShareClick: () -> Unit,
+    onAgendaClick: () -> Unit,
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -287,7 +305,7 @@ private fun NextMeetingHighlightCard(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Button(
-                    onClick = {},
+                    onClick = onAgendaClick,
                     colors =
                         ButtonDefaults.buttonColors(
                             containerColor = DigitsColors.CyanPrimary,
