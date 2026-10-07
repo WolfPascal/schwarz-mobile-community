@@ -23,7 +23,7 @@ tasks.register<JavaExec>("ktlintCheck") {
     jvmArgs("--add-opens=java.base/java.lang=ALL-UNNAMED")
     args(
         "**/src/**/*.kt",
-        "!**/build/**"
+        "!**/build/**",
     )
 }
 
@@ -36,6 +36,6 @@ tasks.register<JavaExec>("ktlintFormat") {
     args(
         "-F",
         "**/src/**/*.kt",
-        "!**/build/**"
+        "!**/build/**",
     )
 }

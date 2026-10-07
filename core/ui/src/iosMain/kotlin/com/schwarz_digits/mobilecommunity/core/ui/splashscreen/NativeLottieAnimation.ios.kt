@@ -16,17 +16,19 @@ import kotlin.experimental.ExperimentalObjCName
 object LottieSplashHelper {
     var lottieViewFactory: ((jsonContent: String, onFinished: () -> Unit) -> UIView)? = null
 }
+
 @Composable
 actual fun NativeLottieAnimation(
     jsonContent: String,
     progress: Float,
     modifier: Modifier,
-    onAnimationFinished: () -> Unit
+    onAnimationFinished: () -> Unit,
 ) {
     Box(
-        modifier = modifier
-            .fillMaxSize()
-            .background(Color.Black)
+        modifier =
+            modifier
+                .fillMaxSize()
+                .background(Color.Black),
     ) {
         LaunchedEffect(Unit) {
             triggerIosHaptic()
@@ -38,7 +40,7 @@ actual fun NativeLottieAnimation(
                 factory = {
                     factory(jsonContent, onAnimationFinished)
                 },
-                modifier = Modifier.fillMaxSize()
+                modifier = Modifier.fillMaxSize(),
             )
         }
     }

@@ -16,6 +16,4 @@ object MockDataProvider {
     suspend fun getImageBytes(imageName: String): ByteArray = Res.readBytes("files/images/$imageName")
 
     suspend fun getSplashScreenJson(): String = Res.readBytes("files/raw/splash_screen_mc.json").decodeToString()
-
 }
-

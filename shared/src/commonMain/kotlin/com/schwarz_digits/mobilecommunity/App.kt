@@ -36,11 +36,10 @@ fun App(
                     progress = 1f,
                     onAnimationFinished = {
                         splashScreenFinished = true
-                    }
+                    },
                 )
             }
         } else {
-
             var currentDestination by remember { mutableStateOf(NavigationDestination.NEWS) }
 
             Scaffold(

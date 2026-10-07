@@ -26,21 +26,25 @@ actual fun NativeLottieAnimation(
     jsonContent: String,
     progress: Float,
     modifier: Modifier,
-    onAnimationFinished: () -> Unit
+    onAnimationFinished: () -> Unit,
 ) {
     SplashScreen(jsonContent, onAnimationFinished)
 }
 
 @Composable
-fun SplashScreen(jsonContent: String, onAnimationFinished: () -> Unit = {}) {
+fun SplashScreen(
+    jsonContent: String,
+    onAnimationFinished: () -> Unit = {},
+) {
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black)
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .background(Color.Black),
     ) {
         AnimatedVisibility(
             visible = true,
-            enter = fadeIn(animationSpec = tween())
+            enter = fadeIn(animationSpec = tween()),
         ) {
             SplashScreenAnimation(jsonContent, onAnimationFinished)
         }
@@ -48,38 +52,43 @@ fun SplashScreen(jsonContent: String, onAnimationFinished: () -> Unit = {}) {
 }
 
 @Composable
-private fun SplashScreenAnimation(jsonContent: String, onAnimationFinished: () -> Unit) {
+private fun SplashScreenAnimation(
+    jsonContent: String,
+    onAnimationFinished: () -> Unit,
+) {
     val context = LocalContext.current
     var hasVibrated by remember { mutableStateOf(false) }
 
-
     val composition by rememberLottieComposition(
-        LottieCompositionSpec.JsonString(jsonContent)
+        LottieCompositionSpec.JsonString(jsonContent),
     )
 
-    val logoAnimationState = animateLottieCompositionAsState(
-        composition = composition,
-        isPlaying = true
-    )
+    val logoAnimationState =
+        animateLottieCompositionAsState(
+            composition = composition,
+            isPlaying = true,
+        )
 
-    val hapticMarker = remember(composition) {
-        composition?.getMarker("haptic_impact")
-    }
-
-    val markerProgress = remember(composition, hapticMarker) {
-        val comp = composition
-        val marker = hapticMarker
-        if (comp != null && marker != null && comp.durationFrames > 0) {
-            (marker.startFrame - comp.startFrame) / comp.durationFrames
-        } else {
-            null
+    val hapticMarker =
+        remember(composition) {
+            composition?.getMarker("haptic_impact")
         }
-    }
+
+    val markerProgress =
+        remember(composition, hapticMarker) {
+            val comp = composition
+            val marker = hapticMarker
+            if (comp != null && marker != null && comp.durationFrames > 0) {
+                (marker.startFrame - comp.startFrame) / comp.durationFrames
+            } else {
+                null
+            }
+        }
 
     LaunchedEffect(logoAnimationState.progress, markerProgress) {
         if (markerProgress != null && logoAnimationState.progress >= markerProgress && !hasVibrated) {
             hasVibrated = true
-            //TODO: Vibrate
+            // TODO: Vibrate
             context.vibratePhone()
         }
     }
@@ -89,17 +98,16 @@ private fun SplashScreenAnimation(jsonContent: String, onAnimationFinished: () -
         composition = composition,
         clipToCompositionBounds = false,
         progress = { logoAnimationState.progress },
-        safeMode = true
+        safeMode = true,
     )
 
     LaunchedEffect(logoAnimationState.isAtEnd) {
         if (logoAnimationState.isAtEnd && logoAnimationState.progress == 1f) {
-            //TODO: Show Main Screen
+            // TODO: Show Main Screen
             onAnimationFinished()
         }
     }
 }
-
 
 @Preview
 @Composable

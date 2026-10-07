@@ -12,7 +12,7 @@ fun SplashScreenContainer(onAnimationFinished: () -> Unit) {
         NativeLottieAnimation(
             jsonContent = jsonContent,
             progress = 1f,
-            onAnimationFinished = onAnimationFinished
+            onAnimationFinished = onAnimationFinished,
         )
     }
 }

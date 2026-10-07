@@ -10,13 +10,14 @@ expect fun NativeLottieAnimation(
     jsonContent: String,
     progress: Float,
     modifier: Modifier = Modifier,
-    onAnimationFinished: () -> Unit
+    onAnimationFinished: () -> Unit,
 )
 
 @Composable
 fun rememberSplashScreenJson(): String? {
-    val splashJsonState = produceState<String?>(initialValue = null) {
-        value = MockDataProvider.getSplashScreenJson()
-    }
+    val splashJsonState =
+        produceState<String?>(initialValue = null) {
+            value = MockDataProvider.getSplashScreenJson()
+        }
     return splashJsonState.value
 }

@@ -20,7 +20,7 @@ fun SplashScreenViewController(onFinished: () -> Unit): UIViewController =
             NativeLottieAnimation(
                 jsonContent = jsonContent,
                 progress = 1f,
-                onAnimationFinished = onFinished
+                onAnimationFinished = onFinished,
             )
         }
     }
