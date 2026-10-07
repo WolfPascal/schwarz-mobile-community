@@ -7,7 +7,8 @@
     "format": "HYBRID",
     "location": "Schwarz Digits Campus & Google Meet",
     "speaker": "Aleks Morgan & Guild Leads",
-    "isNext": true
+    "isNext": true,
+    "agendaUrl": "https://gruppe.schwarz"
   },
   {
     "id": "2",
@@ -17,7 +18,8 @@
     "format": "VIRTUAL",
     "location": "Google Meet",
     "speaker": "Jordan Taylor & Mobile Leads",
-    "isNext": false
+    "isNext": false,
+    "agendaUrl": "https://schwarz-digits.de"
   },
   {
     "id": "3",
@@ -27,6 +29,7 @@
     "format": "HYBRID",
     "location": "Heilbronn & Google Meet",
     "speaker": "Samira Becker & Security Guild",
-    "isNext": false
+    "isNext": false,
+    "agendaUrl": "https://schwarz-digits.de"
   }
 ]

@@ -21,6 +21,7 @@ class MeetingsRepository(
                     location = dto.location,
                     speaker = dto.speaker,
                     isNext = dto.isNext,
+                    agendaUrl = dto.agendaUrl,
                 )
             }
         }
