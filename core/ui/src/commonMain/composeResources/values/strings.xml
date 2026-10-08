@@ -16,6 +16,8 @@
     <string name="meetings_headline">Community Gatherings</string>
     <string name="meetings_subtitle">Monthly gatherings for knowledge sharing, demos, and networking.</string>
     <string name="meetings_badge_next">NEXT GATHERING</string>
+    <string name="meetings_section_upcoming">Upcoming</string>
+    <string name="meetings_section_past">Past</string>
     <string name="meetings_action_join">See agenda →</string>
     <string name="meetings_host_prefix">Host: %1$s</string>
     <string name="meetings_speaker_prefix">Speaker: %1$s</string>

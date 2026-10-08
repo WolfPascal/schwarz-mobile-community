@@ -9,6 +9,7 @@ import com.schwarz_digits.mobilecommunity.core.model.Meeting
 import com.schwarz_digits.mobilecommunity.core.model.MeetingFormat
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import kotlin.time.Instant
 
 /**
  * Shared Compose Multiplatform UI test for [NextMeetingHighlightCard].
@@ -25,7 +26,8 @@ class MeetingCardUiTest : BaseComposeTest() {
             format = MeetingFormat.HYBRID,
             location = "Schwarz Digits Campus",
             speaker = "Aleks Morgan",
-            isNext = true,
+            startsAt = Instant.parse("2026-10-22T14:00:00Z"),
+            endsAt = Instant.parse("2026-10-22T15:30:00Z"),
             agendaUrl = "https://schwarz-digits.de",
         )
 
