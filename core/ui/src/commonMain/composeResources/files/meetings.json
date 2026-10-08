@@ -3,12 +3,13 @@
     "id": "1",
     "title": "Mobile Gathering #15: Compose Multiplatform in Production",
     "date": "Oct 22, 2026",
-    "time": "16:00 - 17:30 CET",
+    "time": "16:00 - 17:30 CEST",
     "format": "HYBRID",
     "location": "Schwarz Digits Campus & Google Meet",
     "speaker": "Aleks Morgan & Guild Leads",
-    "isNext": true,
-    "agendaUrl": "https://gruppe.schwarz"
+    "agendaUrl": "https://gruppe.schwarz",
+    "startsAt": "2026-10-22T14:00:00Z",
+    "endsAt": "2026-10-22T15:30:00Z"
   },
   {
     "id": "2",
@@ -18,8 +19,9 @@
     "format": "VIRTUAL",
     "location": "Google Meet",
     "speaker": "Jordan Taylor & Mobile Leads",
-    "isNext": false,
-    "agendaUrl": "https://schwarz-digits.de"
+    "agendaUrl": "https://schwarz-digits.de",
+    "startsAt": "2026-11-19T15:00:00Z",
+    "endsAt": "2026-11-19T16:30:00Z"
   },
   {
     "id": "3",
@@ -29,7 +31,30 @@
     "format": "HYBRID",
     "location": "Heilbronn & Google Meet",
     "speaker": "Samira Becker & Security Guild",
-    "isNext": false,
-    "agendaUrl": "https://schwarz-digits.de"
+    "agendaUrl": "https://schwarz-digits.de",
+    "startsAt": "2026-12-17T14:30:00Z",
+    "endsAt": "2026-12-17T16:00:00Z"
+  },
+  {
+    "id": "4",
+    "title": "Mobile Gathering #14: Kotlin 2.4 & Swift Export Deep Dive",
+    "date": "Sep 17, 2026",
+    "time": "16:00 - 17:30 CEST",
+    "format": "VIRTUAL",
+    "location": "Google Meet",
+    "speaker": "Chris Novak & KMP Guild",
+    "startsAt": "2026-09-17T14:00:00Z",
+    "endsAt": "2026-09-17T15:30:00Z"
+  },
+  {
+    "id": "5",
+    "title": "Mobile Gathering #13: Accessibility in Retail Apps",
+    "date": "Aug 20, 2026",
+    "time": "16:00 - 17:30 CEST",
+    "format": "ONSITE",
+    "location": "Neckarsulm, Room Ada Lovelace",
+    "speaker": "Lena Fischer & Design System Team",
+    "startsAt": "2026-08-20T14:00:00Z",
+    "endsAt": "2026-08-20T15:30:00Z"
   }
 ]

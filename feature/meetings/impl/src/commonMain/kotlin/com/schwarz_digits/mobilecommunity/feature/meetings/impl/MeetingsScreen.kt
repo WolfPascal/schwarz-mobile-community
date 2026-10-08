@@ -56,6 +56,8 @@ import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_empty_subti
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_empty_title
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_headline
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_host_prefix
+import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_section_past
+import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_section_upcoming
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_share_text
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_speaker_prefix
 import com.schwarz_digits.mobilecommunity.core.ui.resources.meetings_subtitle
@@ -170,6 +172,7 @@ internal fun MeetingsScreen(
                     )
                 }
             }
+
             is MeetingsUiState.Empty -> {
                 item {
                     EmptyStateView(
@@ -178,6 +181,7 @@ internal fun MeetingsScreen(
                     )
                 }
             }
+
             is MeetingsUiState.Error -> {
                 item {
                     ErrorStateView(
@@ -187,9 +191,10 @@ internal fun MeetingsScreen(
                     )
                 }
             }
+
             is MeetingsUiState.Success -> {
-                items(state.meetings, key = { it.id }) { meeting ->
-                    if (meeting.isNext) {
+                state.schedule.next?.let { meeting ->
+                    item(key = meeting.id) {
                         NextMeetingHighlightCard(
                             meeting = meeting,
                             onShareClick = { shareLauncher(shareText) },
@@ -197,7 +202,20 @@ internal fun MeetingsScreen(
                                 selectedAgendaUrl = meeting.agendaUrl ?: "https://schwarz-digits.de"
                             },
                         )
-                    } else {
+                    }
+                }
+                if (state.schedule.upcoming.isNotEmpty()) {
+                    item { SectionHeader(stringResource(Res.string.meetings_section_upcoming)) }
+                    items(state.schedule.upcoming, key = { it.id }) { meeting ->
+                        StandardMeetingCard(
+                            meeting = meeting,
+                            onShareClick = { shareLauncher(shareText) },
+                        )
+                    }
+                }
+                if (state.schedule.past.isNotEmpty()) {
+                    item { SectionHeader(stringResource(Res.string.meetings_section_past)) }
+                    items(state.schedule.past, key = { it.id }) { meeting ->
                         StandardMeetingCard(
                             meeting = meeting,
                             onShareClick = { shareLauncher(shareText) },
@@ -207,6 +225,17 @@ internal fun MeetingsScreen(
             }
         }
     }
+}
+
+@Composable
+private fun SectionHeader(title: String) {
+    Text(
+        text = title,
+        modifier = Modifier.padding(top = 8.dp),
+        style = MaterialTheme.typography.titleMedium,
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
 }
 
 @Composable

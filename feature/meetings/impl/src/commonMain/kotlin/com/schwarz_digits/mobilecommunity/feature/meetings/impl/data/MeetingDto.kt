@@ -14,6 +14,7 @@ data class MeetingDto(
     val format: String,
     val location: String,
     val speaker: String,
-    val isNext: Boolean = false,
+    val startsAt: String,
+    val endsAt: String,
     val agendaUrl: String? = null,
 )
