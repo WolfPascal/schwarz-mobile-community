@@ -1,36 +1,38 @@
-# Specification: Chronological Meeting Sorting & Grouping
+# Specification 01: Meeting Sorting & Categorization
 
 ## Goal & Scope
-Implement deterministic chronological sorting and grouping in `scheduleOf` to transform a flat list of `Meeting` models into a structured `MeetingSchedule`. The function must partition meetings relative to a given `now: Instant` into a single highlighted next meeting, upcoming meetings sorted ascending, and past meetings sorted descending.
+Implement chronological sorting and categorization in `scheduleOf` to transform a raw list of `Meeting` entities into a populated `MeetingSchedule` data class relative to a reference time `now: Instant`. Testing is strictly out of scope for this task.
 
 ## Affected files / components
-- Domain logic: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/domain/MeetingSchedule.kt`
-- Domain model: `core/model/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/core/model/Meeting.kt`
-- UI presentation: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/MeetingsScreen.kt`
-- ViewModel: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/presentation/MeetingsViewModel.kt`
-- Unit tests: `feature/meetings/impl/src/commonTest/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/domain/MeetingScheduleTest.kt`
+- Domain logic: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/domain/MeetingSchedule.kt` (function `scheduleOf`)
+- Domain model: `core/model/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/core/model/Meeting.kt` (`startsAt: Instant`, `endsAt: Instant`)
+- Presentation State: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/presentation/MeetingsViewModel.kt`
+- UI Screen: `feature/meetings/impl/src/commonMain/kotlin/com/schwarz_digits/mobilecommunity/feature/meetings/impl/MeetingsScreen.kt`
 
-## Business rules & sorting logic
-- **Time Representation**: All timestamps are UTC-based `kotlin.time.Instant` values (`startsAt`, `endsAt`). Comparisons are evaluated directly on `Instant` instances, ensuring timezone independence.
-- **Classification Relative to `now`**:
-  - **Active / Not Ended**: A meeting is active if `endsAt > now`. Meetings currently in progress (`startsAt <= now < endsAt`) are considered active.
-  - **Past / Completed**: A meeting is past if `endsAt <= now`.
-- **Grouping & Ordering**:
-  - `next`: The active meeting (`endsAt > now`) with the earliest `startsAt`. If multiple active meetings exist, the one with the smallest `startsAt` is selected. If no active meetings exist, `next` is `null`.
-  - `upcoming`: All active meetings excluding `next`, sorted in ascending order by `startsAt` (earliest meeting first).
-  - `past`: All completed meetings (`endsAt <= now`), sorted in descending order by `startsAt` (most recent meeting first).
+## Business rules
+- **Reference Time**: Evaluate all meetings against `now: Instant` using UTC instant comparison.
+- **Categorization**:
+  - **Past (`past`)**: Meetings that ended at or before `now` (`endsAt <= now`).
+  - **Active / Upcoming**: Meetings that have not ended yet (`endsAt > now`). Meetings in progress (`startsAt <= now < endsAt`) count as active.
+- **Sorting & Extraction**:
+  - **`next`**: The single active meeting with the earliest `startsAt`. Extracted as a single `Meeting?` item and excluded from the `upcoming` list. If there are no active meetings, `next` is `null`.
+  - **`upcoming`**: All remaining active meetings after extracting `next`, sorted chronologically in ascending order (`startsAt` earliest first).
+  - **`past`**: All past meetings, sorted reverse-chronologically in descending order (`startsAt` most recent first).
+- **Target Data Class**: Return `MeetingSchedule(next: Meeting?, upcoming: List<Meeting>, past: List<Meeting>)`.
 
 ## Edge cases
-- **Identical Timestamps**: If two meetings share the identical `startsAt`, tie-break deterministically using `id` in natural ascending order (`compareBy({ it.startsAt }, { it.id })`).
-- **Empty List**: When `meetings` is empty, return `MeetingSchedule(next = null, upcoming = emptyList(), past = emptyList())`.
-- **Only Past Meetings**: When all meetings have `endsAt <= now`, `next` is `null`, `upcoming` is `emptyList()`, and `past` contains all meetings sorted descending by `startsAt`.
-- **Only Future Meetings**: `next` holds the earliest meeting, `upcoming` holds all other meetings sorted ascending, and `past` is `emptyList()`.
-- **Meeting Ending Exactly at `now`**: A meeting with `endsAt == now` is classified as `past`, not active.
-- **Missing or Malformed Timestamps**: `startsAt` and `endsAt` are non-nullable `kotlin.time.Instant` fields guaranteed valid by the data layer.
+- **Empty input list**: Return `MeetingSchedule(next = null, upcoming = emptyList(), past = emptyList())`.
+- **All meetings in the past**: `next` is `null`, `upcoming` is `emptyList()`, and `past` contains all meetings sorted descending by `startsAt`.
+- **All meetings in the future**: `next` is the single earliest meeting, `upcoming` contains all other meetings sorted ascending by `startsAt`, and `past` is `emptyList()`.
+- **Single active meeting**: `next` is that meeting, `upcoming` is `emptyList()`, and `past` contains any past meetings.
+- **Identical `startsAt` timestamps**: Tie-break deterministically using `id` in ascending order (`compareBy({ it.startsAt }, { it.id })`).
+- **Meeting ending exactly at `now`**: Categorized as `past` (`endsAt <= now`).
 
 ## Acceptance criteria
+- [ ] **Given** a raw list of meetings and current time `now`, **when** `scheduleOf(meetings, now)` is called, **then** `MeetingSchedule` is populated with `next`, `upcoming`, and `past`.
+- [ ] **Given** active meetings exist, **when** categorized, **then** `next` contains exactly one `Meeting` (the closest future meeting) and is excluded from `upcoming`.
+- [ ] **Given** no active meetings exist, **when** categorized, **then** `next` is `null` and `upcoming` is empty.
+- [ ] **Given** multiple upcoming meetings, **when** categorized, **then** `upcoming` is sorted chronologically in ascending order of `startsAt`.
+- [ ] **Given** multiple past meetings, **when** categorized, **then** `past` is sorted reverse-chronologically in descending order of `startsAt`.
 - [ ] **Given** an empty list of meetings, **when** `scheduleOf(emptyList(), now)` is called, **then** `next` is `null`, `upcoming` is empty, and `past` is empty.
-- [ ] **Given** multiple future meetings in arbitrary order, **when** `scheduleOf(meetings, now)` is called, **then** `next` is the meeting with the lowest `startsAt`, and `upcoming` contains the remaining future meetings sorted in ascending order of `startsAt`.
-- [ ] **Given** a meeting currently in progress (`startsAt < now` and `endsAt > now`) and future meetings, **when** `scheduleOf(meetings, now)` is called, **then** the in-progress meeting is selected as `next`.
-- [ ] **Given** multiple past meetings (`endsAt <= now`), **when** `scheduleOf(meetings, now)` is called, **then** `past` contains all past meetings ordered descending by `startsAt` (most recent first).
-- [ ] **Given** meetings with identical `startsAt` values, **when** `scheduleOf(meetings, now)` is called, **then** ordering remains deterministic using `id` ascending as a tie-breaker.
+- [ ] **Given** the new `MeetingSchedule` output, **when** observed by `MeetingsViewModel`, **then** the UI displays the next highlighted meeting and section lists deterministically.

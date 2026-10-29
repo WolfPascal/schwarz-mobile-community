@@ -373,9 +373,9 @@ internal fun NextMeetingHighlightCard(
 }
 
 @Composable
-private fun StandardMeetingCard(
+internal fun StandardMeetingCard(
     meeting: Meeting,
-    onShareClick: () -> Unit,
+    onShareClick: () -> Unit = {},
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -463,4 +463,18 @@ private fun StandardMeetingCard(
             }
         }
     }
+}
+
+/**
+ * Tile representing an upcoming meeting item in the schedule list.
+ */
+@Composable
+internal fun UpcomingMeetingTile(
+    meeting: Meeting,
+    onShareClick: () -> Unit = {},
+) {
+    StandardMeetingCard(
+        meeting = meeting,
+        onShareClick = onShareClick,
+    )
 }
