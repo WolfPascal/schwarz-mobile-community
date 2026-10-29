@@ -19,10 +19,16 @@ data class MeetingSchedule(
 /**
  * Groups [meetings] into a [MeetingSchedule] as seen at [now].
  *
- * A meeting counts as past once its end time is at or before [now].
- * A meeting that is currently running is still the next one.
+ * Note: The implementation to highlight or support the next meeting is still missing here.
+ * Currently, all meetings are simply returned as upcoming.
  */
 fun scheduleOf(
     meetings: List<Meeting>,
     now: Instant,
-): MeetingSchedule = TODO("Group the meetings into next, upcoming and past")
+): MeetingSchedule =
+    // TODO: The implementation to highlight or support the next meeting is still missing.
+    MeetingSchedule(
+        next = null,
+        upcoming = meetings,
+        past = emptyList(),
+    )
